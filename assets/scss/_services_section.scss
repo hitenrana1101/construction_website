@@ -1,0 +1,97 @@
+
+
+.services-area1 {
+  .single-service-cap {
+    overflow: hidden;
+
+    .service-img {
+      height: 380px;              // ⬅️ INCREASED IMAGE SIZE
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;              // ⬅️ ensures full coverage
+        object-fit: cover;         // ⬅️ no stretching, perfect fit
+        transform: scale(1);
+        @include transition(0.5s);
+      }
+    }
+
+    .service-cap {
+      padding: 20px 30px 20px 30px;
+      background: #fcfdff;
+
+      h4 {
+        margin-bottom: 35px;
+
+        a {
+          color: $heading-color;
+          font-size: 24px;
+          font-weight: 700;
+
+          @media #{$xs} {
+            font-size: 18px;
+          }
+
+          &:hover {
+            color: $theme_color;
+          }
+        }
+      }
+    }
+
+    .service-icon {
+      img {
+        width: 100%;
+      }
+    }
+
+    /* ❤️ Hover Zoom Effect */
+    &:hover {
+      .service-img {
+        img {
+          transform: scale(1.2);   // ⬅️ cleaner zoom, not too much
+        }
+      }
+    }
+  }
+}
+
+/* Removed image zoom conflict — kept only more-btn hover */
+.single-service-cap:hover {
+  .more-btn {
+    i {
+      color: #fff;
+      background: #ff5f13;
+    }
+  }
+}
+
+.more-btn {
+  color: #161e46;
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+
+  i {
+    color: #161e46;
+    background: transparent;
+    width: 38px;
+    height: 38px;
+    display: inline-block;
+    line-height: 38px;
+    text-align: center;
+    font-size: 15px;
+    margin-left: 10px;
+    @include transition(0.4s);
+  }
+
+  &:hover {
+    color: #161e46;
+    i {
+      color: #fff;
+      background: #ff5f13;
+    }
+  }
+}
