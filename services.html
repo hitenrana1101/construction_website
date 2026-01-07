@@ -142,7 +142,7 @@
                     <div class="col-lg-12">
                         <div class="section-tittle mb-55">
                             <div class="front-text">
-                                <h2 class="">Our Services</h2>
+                                <h2 class="">Our Projects</h2>
                             </div>
                             <span class="back-text">Services</span>
                         </div>
@@ -152,7 +152,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-service-cap mb-30 popup-gallery">
                             <div class="service-img">
-                                <img src="./assets/img/gallery/services(17).jpeg" alt="" height="268px" style="width: 100%;height: 268px;object-fit: cover;">
+                                <img src="./assets/img/gallery/services(19).jpeg" alt="" height="268px" style="width: 100%;height: 268px;object-fit: cover;">
                             </div>
 
                             <!-- GALLERY IMAGES (HIDDEN) -->
@@ -241,7 +241,7 @@
                       <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-service-cap mb-30 popup-gallery">
                             <div class="service-img">
-                                <img src="./assets/img/gallery/Gazebo(11).jpeg" alt="" style="height: 278px; width: 100%;">
+                                <img src="./assets/img/gallery/Gazebo(4).jpeg" alt="" style="height: 278px; width: 100%;">
                             </div>
 
                             <!-- GALLERY IMAGES (HIDDEN) -->
@@ -478,7 +478,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-service-cap mb-30 popup-gallery">
                             <div class="service-img">
-                                <img src="./assets/img/gallery/Renovation.jpeg" alt="" style="width: 100%; height: 268px; object-fit: cover;">
+                                <img src="./assets/img/gallery/Renovation(7).jpeg" alt="" style="width: 100%; height: 268px; object-fit: cover;">
                             </div>
 
                             <!-- GALLERY IMAGES (HIDDEN) -->
@@ -650,12 +650,14 @@
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
 
-    <script>
+     <script>
 $(document).ready(function() {
-    $('.single-service-cap').on('click', function(e) {
+    // Gallery popup for image click
+    $('.single-service-cap .service-img').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
 
-        const galleryLinks = $(this).find('.service-gallery a');
+        const galleryLinks = $(this).closest('.single-service-cap').find('.service-gallery a');
 
         $.magnificPopup.open({
             items: galleryLinks.map(function () {
@@ -670,8 +672,95 @@ $(document).ready(function() {
             fixedContentPos: true
         });
     });
+
+    // Read More button functionality
+    $('.more-btn').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Prevents parent click event
+        
+        const serviceCapDiv = $(this).closest('.service-cap');
+        let textDiv = serviceCapDiv.find('.renovation-text');
+        
+        if (textDiv.length === 0) {
+            // Create and add the text
+            serviceCapDiv.append('<div class="renovation-text"><p style="margin-top: 15px; color: #333;"></p></div>');
+            $(this).html('Read Less <i class="ti-minus"></i>');
+        } else {
+            // Remove the text (toggle)
+            textDiv.remove();
+            $(this).html('Read More <i class="ti-plus"></i>');
+        }
+    });
 });
+
+$(document).ready(function() {
+    // Service descriptions
+    const serviceDescriptions = {
+        'Flooring Installation': 'Professional flooring installation services for residential and commercial spaces.',
+        'Kitchens & Bathrooms': 'Complete kitchen and bathroom renovation with modern designs and fixtures.',
+        'Grocery store shelving': 'Custom shelving solutions for grocery stores and retail spaces.',
+        'Gazebo': 'Beautiful outdoor gazebo construction for your backyard and garden.',
+        'Decorwalls': 'Decorative wall designs and installations for interior and exterior spaces.',
+        'Commercial metal and wood framing': 'Professional metal and wood framing services for commercial projects.',
+        'Framing & Structural Work': 'Expert framing and structural work for construction projects.',
+        'Custom wooden shelves': 'Handcrafted custom wooden shelves tailored to your needs.',
+        'Permanent lighting': 'Energy-efficient permanent lighting solutions for homes and businesses.',
+        'Pergola and Deck': 'Custom pergola and deck construction for outdoor living spaces.'
+    };
+
+    // Gallery popup for image click
+    $('.single-service-cap .service-img').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const galleryLinks = $(this).closest('.single-service-cap').find('.service-gallery a');
+
+        $.magnificPopup.open({
+            items: galleryLinks.map(function () {
+                return { src: $(this).attr('href') };
+            }).get(),
+            type: 'image',
+            gallery: {
+                enabled: true
+            },
+            closeOnContentClick: false,
+            closeBtnInside: true,
+            fixedContentPos: true
+        });
+    });
+
+    // Read More button functionality
+    $('.more-btn').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const serviceCapDiv = $(this).closest('.service-cap');
+        const serviceName = serviceCapDiv.find('h4 a').text().trim();
+        let textDiv = serviceCapDiv.find('.service-text');
+        
+        if (textDiv.length === 0) {
+            // Get description from object or use service name as fallback
+            const description = serviceDescriptions[serviceName] || serviceName;
+            
+            // Create and add the text
+            serviceCapDiv.append(`
+                <div class="service-text">
+                    <p style="margin-top: 15px; color: #333; font-size: 14px; line-height: 1.6;">
+                        ${description}
+                    </p>
+                </div>
+            `);
+            $(this).html('Read Less <i class="ti-minus"></i>');
+        } else {
+            // Remove the text (toggle)
+            textDiv.remove();
+            $(this).html('Read More <i class="ti-plus"></i>');
+        }
+    });
+});
+
 </script>
+
 
 </body>
 
