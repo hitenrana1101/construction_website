@@ -6,6 +6,23 @@
     padding: 6px 10px;
     cursor: pointer;
 }
+@media(max-width:480px) {
+h2.Our_services {
+    font-size: 50px;
+  }
+}
+ 
+ 
+.residential-points{
+ padding-top: 30px;
+}
+.residential-points p{
+    background-color: #e0dfdfc5;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 20px;
+    width: fit-content;
+}
 
 .gj-unselectable {
     -webkit-touch-callout: none;
